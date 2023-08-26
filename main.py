@@ -48,7 +48,7 @@ def main():
     app = QtWidgets.QApplication(sys.argv)
     #create and show the window
     main = MainWindow()
-    main.show()
+    main.showMaximized()
     #start the app
     sys.exit(app.exec())
 
