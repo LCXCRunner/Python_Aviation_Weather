@@ -4,7 +4,7 @@ import datetime
 import geocoder
 from metar import Metar
 import sys
-from PyQt6 import QtCore, QtGui, uic, QtWidgets
+from PyQt5 import QtCore, QtGui, uic, QtWidgets
 import pyqtgraph as pg
 
 
