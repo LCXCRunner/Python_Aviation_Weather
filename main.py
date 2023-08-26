@@ -4,12 +4,16 @@ import datetime
 import geocoder
 from metar import Metar
 
-# installing metar package:
+# Windows installing metar package:
 # git clone https://github.com/python-metar/python-metar
 # navigate to folder, Windows: C:\Windows\System32\cmd.exe
 # run: python setup.py install
 # from within the directory 
 
+# Linux installing metar package:
+# git clone https://github.com/python-metar/python-metar
+# navigate to folder
+# run: sudo python setup.py install
 
 def main():
     starttime = time.time()
@@ -20,6 +24,7 @@ def main():
     multiRequest = requests.get("https://beta.aviationweather.gov/cgi-bin/data/metar.php?ids=KSLC,KTVY,KU42")
     airportMetars = multiRequest.text.splitlines()
     SLCmetar = Metar.Metar(airportMetars[0])
+    print(airportMetars[0])
     metarDecoder(SLCmetar)
 
 def metarDecoder(metar : Metar.Metar):
@@ -79,9 +84,7 @@ def metarDecoder(metar : Metar.Metar):
     # attributes and won't be listed here.
     if metar._remarks:
         print("remarks:")
-        print("- " + metar.remarks("\n- "))
-    
-    
+        print("- " + metar.remarks("\n- "))   
     
 # while True:
 #     print(f"Current Location: {myLocation.city}")
