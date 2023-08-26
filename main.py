@@ -3,6 +3,10 @@ import time
 import datetime
 import geocoder
 from metar import Metar
+import sys
+from PyQt6 import QtCore, QtGui, uic, QtWidgets
+import pyqtgraph as pg
+
 
 # Windows installing metar package:
 # git clone https://github.com/python-metar/python-metar
@@ -15,7 +19,40 @@ from metar import Metar
 # navigate to folder
 # run: sudo python setup.py install
 
+qtCreatorFile="metar.ui"
+Ui_MainWindow, QtBaseClass=uic.loadUiType(qtCreatorFile)
+
+class MainWindow(Ui_MainWindow, QtBaseClass):
+    def __init__(self):
+        super(Ui_MainWindow, self).__init__()
+
+        # Set up the user interface from Designer.
+        self.setupUi(self)
+        
+        #set the window title
+        self.setWindowTitle("Local Salt Lake Valley METAR")
+        
+        #Ok button
+        self.okButton.clicked.connect(self.reject)
+        self.okButton.setAutoDefault(True)
+        self.okButton.setDefault(False)
+        self.okButton.setText("OK")
+        #Cancel Button
+        self.cancelButton.clicked.connect(self.reject)
+        self.cancelButton.setAutoDefault(False)
+        self.cancelButton.setDefault(False)
+        self.cancelButton.setText("Cancel")
+
 def main():
+    #create app
+    app = QtWidgets.QApplication(sys.argv)
+    #create and show the window
+    main = MainWindow()
+    main.show()
+    #start the app
+    sys.exit(app.exec())
+
+def aviationWeatherAPI():
     starttime = time.time()
     myLocation = geocoder.ip('me')
     loopDuration : int = 5
@@ -95,4 +132,5 @@ def metarDecoder(metar : Metar.Metar):
 #     time.sleep(loopDuration - ((time.time() - starttime) % loopDuration))    
 
 if __name__ == "__main__":
+    aviationWeatherAPI()
     main()
