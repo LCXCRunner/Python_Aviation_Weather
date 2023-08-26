@@ -48,6 +48,10 @@ def main():
     app = QtWidgets.QApplication(sys.argv)
     #create and show the window
     main = MainWindow()
+    
+    with open("stylesheet.qss","r") as file:
+        app.setStyleSheet(file.read())
+        
     main.showMaximized()
     #start the app
     sys.exit(app.exec())
