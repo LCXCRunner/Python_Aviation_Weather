@@ -61,8 +61,6 @@ class MainWindow(Ui_MainWindow, QtBaseClass):
         self.weatherBox.setMarkdown("" + SLCMetar.sky_conditions())
         self.remarksBox.setMarkdown("" + SLCMetar.remarks())
         
-        
-
 def main():
     #create app
     app = QtWidgets.QApplication(sys.argv)
@@ -73,6 +71,7 @@ def main():
         app.setStyleSheet(file.read())
         
     main.show()
+    
     #start the app
     sys.exit(app.exec())
 
