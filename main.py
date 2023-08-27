@@ -54,7 +54,13 @@ class MainWindow(Ui_MainWindow, QtBaseClass):
         self.temperature.setText("Temperature: " + SLCMetar.temp.string("C"))
         self.dewPoint.setText("Dew Point: " + SLCMetar.dewpt.string("C"))
         self.visibility.setText("Visibility: " + SLCMetar.visibility())
-        self.altimeter.setText("Altimeter: " + SLCMetar.press.string() + "Hg")
+        self.altimeter.setText("Altimeter: " + SLCMetar.press.string() + " of Hg")
+        self.wind.setText("Wind: " + SLCMetar.wind_speed.string("kt"))
+        self.gusts.setText("Gusts: " + str(SLCMetar.wind_gust))
+        self.weather.setText("Weather: " + SLCMetar.present_weather())
+        self.weatherBox.setMarkdown("" + SLCMetar.sky_conditions())
+        self.remarksBox.setMarkdown("" + SLCMetar.remarks())
+        
         
 
 def main():
