@@ -7,7 +7,6 @@ import sys
 from PyQt5 import QtCore, QtGui, uic, QtWidgets
 import pyqtgraph as pg
 
-
 # Windows installing metar package:
 # git clone https://github.com/python-metar/python-metar
 # navigate to folder, Windows: C:\Windows\System32\cmd.exe
@@ -18,6 +17,13 @@ import pyqtgraph as pg
 # git clone https://github.com/python-metar/python-metar
 # navigate to folder
 # run: sudo python setup.py install
+
+#globals
+multiRequest = requests.get("https://beta.aviationweather.gov/cgi-bin/data/metar.php?ids=KSLC,KTVY,KU42")
+airportMetars = multiRequest.text.splitlines()
+SLCMetar = Metar.Metar(airportMetars[0])
+tooeleMetar = Metar.Metar(airportMetars[1])
+southValleyMetar = Metar.Metar(airportMetars[2])
 
 qtCreatorFile="metar.ui"
 Ui_MainWindow, QtBaseClass=uic.loadUiType(qtCreatorFile)
@@ -42,6 +48,8 @@ class MainWindow(Ui_MainWindow, QtBaseClass):
         self.cancelButton.setAutoDefault(False)
         self.cancelButton.setDefault(False)
         self.cancelButton.setText("Cancel")
+        #Main Station Label
+        self.stationLabel.setText(SLCMetar.station_id)
 
 def main():
     #create app
@@ -52,7 +60,7 @@ def main():
     with open("stylesheet.qss","r") as file:
         app.setStyleSheet(file.read())
         
-    main.showMaximized()
+    main.show()
     #start the app
     sys.exit(app.exec())
 
@@ -60,13 +68,16 @@ def aviationWeatherAPI():
     starttime = time.time()
     myLocation = geocoder.ip('me')
     loopDuration : int = 5
+    global multiRequest
+    global airportMetars
+    global SLCMetar
     
     #collect data from the aviationweather.gov api. 
     multiRequest = requests.get("https://beta.aviationweather.gov/cgi-bin/data/metar.php?ids=KSLC,KTVY,KU42")
     airportMetars = multiRequest.text.splitlines()
-    SLCmetar = Metar.Metar(airportMetars[0])
+    SLCMetar = Metar.Metar(airportMetars[0])
     print(airportMetars[0])
-    metarDecoder(SLCmetar)
+    metarDecoder(SLCMetar)
 
 def metarDecoder(metar : Metar.Metar):
     # The 'station_id' attribute is a string.
