@@ -1,1 +1,1 @@
-def metarDecoder():
+string

@@ -34,7 +34,7 @@
     <string>KXXX</string>
    </property>
   </widget>
-  <widget class="QLabel" name="label_4">
+  <widget class="QLabel" name="ZULUTime">
    <property name="geometry">
     <rect>
      <x>490</x>
@@ -53,7 +53,7 @@
     <string>Sat Aug 26 16:54:00 2023</string>
    </property>
   </widget>
-  <widget class="QLabel" name="label_5">
+  <widget class="QLabel" name="ZULU">
    <property name="geometry">
     <rect>
      <x>420</x>
@@ -72,7 +72,7 @@
     <string>ZULU:</string>
    </property>
   </widget>
-  <widget class="QLabel" name="label_6">
+  <widget class="QLabel" name="temperature">
    <property name="geometry">
     <rect>
      <x>20</x>
@@ -91,7 +91,7 @@
     <string>Temperature: XX.X C</string>
    </property>
   </widget>
-  <widget class="QLabel" name="label_7">
+  <widget class="QLabel" name="dewPoint">
    <property name="geometry">
     <rect>
      <x>20</x>
@@ -110,7 +110,7 @@
     <string>Dew Point: XX.X C</string>
    </property>
   </widget>
-  <widget class="QLabel" name="label_8">
+  <widget class="QLabel" name="wind">
    <property name="geometry">
     <rect>
      <x>420</x>
@@ -129,7 +129,7 @@
     <string>Wind: XXX at XX knots</string>
    </property>
   </widget>
-  <widget class="QLabel" name="label_9">
+  <widget class="QLabel" name="visibility">
    <property name="geometry">
     <rect>
      <x>20</x>
@@ -148,7 +148,7 @@
     <string>Visibility: XX miles</string>
    </property>
   </widget>
-  <widget class="QLabel" name="label_10">
+  <widget class="QLabel" name="altimeter">
    <property name="geometry">
     <rect>
      <x>420</x>
@@ -167,7 +167,7 @@
     <string>Altimeter: XX.XX mmHg</string>
    </property>
   </widget>
-  <widget class="QLabel" name="label_11">
+  <widget class="QLabel" name="weather">
    <property name="geometry">
     <rect>
      <x>20</x>
@@ -186,7 +186,7 @@
     <string>Weather: </string>
    </property>
   </widget>
-  <widget class="QTextBrowser" name="textBrowser">
+  <widget class="QTextBrowser" name="weatherBox">
    <property name="geometry">
     <rect>
      <x>50</x>
@@ -215,7 +215,7 @@ p, li { white-space: pre-wrap; }
 &lt;p style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;Scattered clouds at 15000 ft&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
    </property>
   </widget>
-  <widget class="QLabel" name="label_14">
+  <widget class="QLabel" name="METARlabel">
    <property name="geometry">
     <rect>
      <x>0</x>
@@ -234,7 +234,7 @@ p, li { white-space: pre-wrap; }
     <string>METAR:</string>
    </property>
   </widget>
-  <widget class="QLabel" name="label_15">
+  <widget class="QLabel" name="metarTime">
    <property name="geometry">
     <rect>
      <x>120</x>
@@ -279,7 +279,7 @@ p, li { white-space: pre-wrap; }
     <string>PushButton</string>
    </property>
   </widget>
-  <widget class="QLabel" name="label_12">
+  <widget class="QLabel" name="gusts">
    <property name="geometry">
     <rect>
      <x>420</x>
@@ -298,7 +298,7 @@ p, li { white-space: pre-wrap; }
     <string>Gusts: XXX at XX knots</string>
    </property>
   </widget>
-  <widget class="QLabel" name="label_13">
+  <widget class="QLabel" name="remarks">
    <property name="geometry">
     <rect>
      <x>420</x>
@@ -317,7 +317,7 @@ p, li { white-space: pre-wrap; }
     <string>Remarks:</string>
    </property>
   </widget>
-  <widget class="QTextBrowser" name="textBrowser_2">
+  <widget class="QTextBrowser" name="remarksBox">
    <property name="geometry">
     <rect>
      <x>450</x>

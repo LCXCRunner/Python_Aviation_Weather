@@ -48,8 +48,14 @@ class MainWindow(Ui_MainWindow, QtBaseClass):
         self.cancelButton.setAutoDefault(False)
         self.cancelButton.setDefault(False)
         self.cancelButton.setText("Cancel")
-        #Main Station Label
+        #initialize each label for first metar
         self.stationLabel.setText(SLCMetar.station_id)
+        self.metarTime.setText(SLCMetar.time.ctime())
+        self.temperature.setText("Temperature: " + SLCMetar.temp.string("C"))
+        self.dewPoint.setText("Dew Point: " + SLCMetar.dewpt.string("C"))
+        self.visibility.setText("Visibility: " + SLCMetar.visibility())
+        self.altimeter.setText("Altimeter: " + SLCMetar.press.string() + "Hg")
+        
 
 def main():
     #create app
