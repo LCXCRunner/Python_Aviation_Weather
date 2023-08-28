@@ -18,48 +18,65 @@ import pyqtgraph as pg
 # navigate to folder
 # run: sudo python setup.py install
 
-#globals
-multiRequest = requests.get("https://beta.aviationweather.gov/cgi-bin/data/metar.php?ids=KSLC,KTVY,KU42")
-airportMetars = multiRequest.text.splitlines()
-SLCMetar = Metar.Metar(airportMetars[0])
-tooeleMetar = Metar.Metar(airportMetars[1])
-southValleyMetar = Metar.Metar(airportMetars[2])
-
 qtCreatorFile="metar.ui"
-Ui_MainWindow, QtBaseClass=uic.loadUiType(qtCreatorFile)
+# Ui_MainWindow, QtBaseClass=uic.loadUiType(qtCreatorFile)
 
-class MainWindow(Ui_MainWindow, QtBaseClass):
+class MainWindow(QtWidgets.QDialog):
     def __init__(self):
-        super(Ui_MainWindow, self).__init__()
+        super().__init__()
+        uic.loadUi(qtCreatorFile, self)
 
         # Set up the user interface from Designer.
-        self.setupUi(self)
+        # self.setupUi(self)
         
         #set the window title
         self.setWindowTitle("Local Salt Lake Valley METAR")
-        
         #Ok button
+        self.okButton = self.findChild(QtWidgets.QPushButton, "okButton")
+        self.okButton.setProperty("text", "OK")
+        self.okButton.setProperty("autoDefault", True)
+        self.okButton.setProperty("default", False)
         self.okButton.clicked.connect(self.reject)
-        self.okButton.setAutoDefault(True)
-        self.okButton.setDefault(False)
-        self.okButton.setText("OK")
         #Cancel Button
+        self.cancelButton = self.findChild(QtWidgets.QPushButton, "cancelButton")
+        self.cancelButton.setProperty("text", "Cancel")
+        self.cancelButton.setProperty("autoDefault", False)
+        self.cancelButton.setProperty("default", False)
         self.cancelButton.clicked.connect(self.reject)
-        self.cancelButton.setAutoDefault(False)
-        self.cancelButton.setDefault(False)
-        self.cancelButton.setText("Cancel")
-        #initialize each label for first metar
-        self.stationLabel.setText(SLCMetar.station_id)
-        self.metarTime.setText(SLCMetar.time.ctime())
-        self.temperature.setText("Temperature: " + SLCMetar.temp.string("C"))
-        self.dewPoint.setText("Dew Point: " + SLCMetar.dewpt.string("C"))
-        self.visibility.setText("Visibility: " + SLCMetar.visibility())
-        self.altimeter.setText("Altimeter: " + SLCMetar.press.string() + " of Hg")
-        self.wind.setText("Wind: " + SLCMetar.wind_speed.string("kt"))
-        self.gusts.setText("Gusts: " + str(SLCMetar.wind_gust))
-        self.weather.setText("Weather: " + SLCMetar.present_weather())
-        self.weatherBox.setMarkdown("" + SLCMetar.sky_conditions())
-        self.remarksBox.setMarkdown("" + SLCMetar.remarks())
+        
+        # #initialize each label for first metar
+        # self.stationLabel.setText(SLCMetar.station_id)
+        # self.metarTime.setText(SLCMetar.time.ctime())
+        # self.temperature.setText("Temperature: " + SLCMetar.temp.string("C"))
+        # self.dewPoint.setText("Dew Point: " + SLCMetar.dewpt.string("C"))
+        # self.visibility.setText("Visibility: " + SLCMetar.visibility())
+        # self.altimeter.setText("Altimeter: " + SLCMetar.press.string() + " of Hg")
+        # self.wind.setText("Wind: " + SLCMetar.wind_speed.string("kt"))
+        # self.gusts.setText("Gusts: " + str(SLCMetar.wind_gust))
+        # self.weather.setText("Weather: " + SLCMetar.present_weather())
+        # self.weatherBox.setMarkdown("" + SLCMetar.sky_conditions())
+        # self.remarksBox.setMarkdown("" + SLCMetar.remarks())
+        
+        self.worker = WorkerThread()
+        self.worker.start()
+        self.worker.update_progress.connect(self.updateAPIValues)#sends emitted variable to the function
+        
+    def updateAPIValues(self, listOfMetars): #listOfMetars is the emitted var
+        self.stationLabel = self.findChild(QtWidgets.QLabel, "stationLabel")
+        self.stationLabel.setProperty("text", listOfMetars[0].station_id)
+
+class WorkerThread(QtCore.QThread):
+    update_progress = QtCore.pyqtSignal(list)
+    loopDuration : int = 5 #Unit: sec
+    starttime = time.time()
+    emittedList = []
+    def run(self):
+        while True:
+            emittedList = aviationWeatherAPI()
+            self.update_progress.emit(emittedList)
+            time.sleep(self.loopDuration - ((time.time() - self.starttime) % self.loopDuration)) 
+            
+            
         
 def main():
     #create app
@@ -76,19 +93,15 @@ def main():
     sys.exit(app.exec())
 
 def aviationWeatherAPI():
-    starttime = time.time()
-    myLocation = geocoder.ip('me')
-    loopDuration : int = 5
-    global multiRequest
-    global airportMetars
-    global SLCMetar
-    
     #collect data from the aviationweather.gov api. 
     multiRequest = requests.get("https://beta.aviationweather.gov/cgi-bin/data/metar.php?ids=KSLC,KTVY,KU42")
     airportMetars = multiRequest.text.splitlines()
-    SLCMetar = Metar.Metar(airportMetars[0])
-    print(airportMetars[0])
-    metarDecoder(SLCMetar)
+    result : list = []
+    for element in airportMetars:
+        result.append(Metar.Metar(element))
+    print(result)
+    
+    return result
 
 def metarDecoder(metar : Metar.Metar):
     # The 'station_id' attribute is a string.
@@ -148,14 +161,6 @@ def metarDecoder(metar : Metar.Metar):
     if metar._remarks:
         print("remarks:")
         print("- " + metar.remarks("\n- "))   
-    
-# while True:
-#     print(f"Current Location: {myLocation.city}")
-#     print(f"Latitude + Longitude: {myLocation.latlng}")
-#     print(multiRequest)
-#     print()
-    
-#     time.sleep(loopDuration - ((time.time() - starttime) % loopDuration))    
 
 if __name__ == "__main__":
     aviationWeatherAPI()
