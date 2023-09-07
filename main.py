@@ -9,7 +9,7 @@ import pyqtgraph as pg
 
 # Windows installing metar package:
 # git clone https://github.com/python-metar/python-metar
-# navigate to folder, Windows: C:\Windows\System32\cmd.exe
+# navigate to folder, Windows(C:) > Users > "name" > python.metar
 # run: python setup.py install
 # from within the directory 
 
@@ -62,8 +62,25 @@ class MainWindow(QtWidgets.QDialog):
         self.worker.update_progress.connect(self.updateAPIValues)#sends emitted variable to the function
         
     def updateAPIValues(self, listOfMetars): #listOfMetars is the emitted var
+        currMetar : Metar.Metar = listOfMetars[0]
+        
         self.stationLabel = self.findChild(QtWidgets.QLabel, "stationLabel")
-        self.stationLabel.setProperty("text", listOfMetars[0].station_id)
+        self.stationLabel.setProperty("text", currMetar.station_id)
+        self.temperature = self.findChild(QtWidgets.QLabel, "temperature")
+        self.temperature.setProperty("text", "Temperature: %s" % currMetar.temp.string("C"))
+        self.dewPoint = self.findChild(QtWidgets.QLabel, "dewPoint")
+        self.dewPoint.setProperty("text", "Dew Point: %s" % currMetar.dewpt.string("C"))
+        self.visibility = self.findChild(QtWidgets.QLabel, "visibility")
+        self.visibility.setProperty("text", "Visibility: %s" % currMetar.visibility())
+        self.altimeter = self.findChild(QtWidgets.QLabel, "altimeter")
+        self.altimeter.setProperty("text", "Altimeter: %s Hg" % currMetar.press.string("IN"))
+        self.wind = self.findChild(QtWidgets.QLabel, "wind")
+        self.wind.setProperty("text", "Wind: %s at %s" % (currMetar.wind_speed , currMetar.wind_dir))
+        self.gusts = self.findChild(QtWidgets.QLabel, "gusts")
+        self.gusts.setProperty("text", "Gusts: %s" % currMetar.wind_gust)
+        
+        
+        metarDecoder(currMetar)
 
 class WorkerThread(QtCore.QThread):
     update_progress = QtCore.pyqtSignal(list)
@@ -99,8 +116,6 @@ def aviationWeatherAPI():
     result : list = []
     for element in airportMetars:
         result.append(Metar.Metar(element))
-    print(result)
-    
     return result
 
 def metarDecoder(metar : Metar.Metar):
