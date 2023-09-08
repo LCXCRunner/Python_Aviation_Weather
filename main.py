@@ -64,6 +64,7 @@ class MainWindow(QtWidgets.QDialog):
     def updateAPIValues(self, listOfMetars): #listOfMetars is the emitted var
         currMetar : Metar.Metar = listOfMetars[0]
         
+        # main atmospheric labels
         self.stationLabel = self.findChild(QtWidgets.QLabel, "stationLabel")
         self.stationLabel.setProperty("text", currMetar.station_id)
         self.temperature = self.findChild(QtWidgets.QLabel, "temperature")
@@ -78,6 +79,16 @@ class MainWindow(QtWidgets.QDialog):
         self.wind.setProperty("text", "Wind: %s at %s" % (currMetar.wind_speed , currMetar.wind_dir))
         self.gusts = self.findChild(QtWidgets.QLabel, "gusts")
         self.gusts.setProperty("text", "Gusts: %s" % currMetar.wind_gust)
+        
+        # text boxes for "Weather" and "Remarks" labels
+        self.weatherLabel = self.findChild(QtWidgets.QLabel, "weather")
+        self.weatherLabel.setProperty("text", "Weather:")
+        self.weatherBox = self.findChild(QtWidgets.QTextBrowser, "weatherBox")
+        self.weatherBox.setProperty("markdown", '%s %s'% (currMetar.present_weather(), currMetar.sky_conditions("\n- ")))
+        self.remarksLabel = self.findChild(QtWidgets.QLabel, "remarks")
+        self.remarksLabel.setProperty("text", "Remarks:")
+        self.remarksBox = self.findChild(QtWidgets.QTextBrowser, "remarksBox")
+        self.remarksBox.setProperty("markdown", currMetar.remarks())
         
         
         metarDecoder(currMetar)
