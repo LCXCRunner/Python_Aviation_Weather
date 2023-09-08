@@ -103,7 +103,7 @@ class MainWindow(QtWidgets.QDialog):
         self.metarTime.setProperty("text", currMetar.time.ctime())
         # FIND A WAY TO GET CURRENT ZULU TIME IN A DIFFERENT THREAD THAT RUNS EVERY MINUTE OR SO
         
-        metarDecoder(currMetar)
+        #metarDecoder(currMetar)
 
     def updateZULUTime(self, zuluTime):
         self.ZULULabel = self.findChild(QtWidgets.QLabel, "ZULU")
@@ -114,13 +114,13 @@ class MainWindow(QtWidgets.QDialog):
 class APIThread(QtCore.QThread):
     update_API_signal = QtCore.pyqtSignal(list)
     loopDuration : int = 5 #Unit: sec
-    starttime = time.time()
+    startTime = time.time()
     emittedList = []
     def run(self):
         while True:
             emittedList = aviationWeatherAPI()
             self.update_API_signal.emit(emittedList)
-            time.sleep(self.loopDuration - ((time.time() - self.starttime) % self.loopDuration)) 
+            time.sleep(self.loopDuration - ((time.time() - self.startTime) % self.loopDuration)) 
 
 class ZULUTimeThread(QtCore.QThread):
     update_ZULU_signal = QtCore.pyqtSignal(str)
@@ -132,7 +132,7 @@ class ZULUTimeThread(QtCore.QThread):
         while True:
             emittedStr = datetime.datetime.now(tz=datetime.timezone.utc).ctime()
             self.update_ZULU_signal.emit(emittedStr)
-            time.sleep(self.loopDuration - ((time.time() - self.starttime) % self.loopDuration)) 
+            time.sleep(self.loopDuration - ((time.time() - self.startTime) % self.loopDuration)) 
             
             
         
