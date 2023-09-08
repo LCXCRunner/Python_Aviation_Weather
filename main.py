@@ -84,11 +84,11 @@ class MainWindow(QtWidgets.QDialog):
         self.weatherLabel = self.findChild(QtWidgets.QLabel, "weather")
         self.weatherLabel.setProperty("text", "Weather:")
         self.weatherBox = self.findChild(QtWidgets.QTextBrowser, "weatherBox")
-        self.weatherBox.setProperty("markdown", '%s %s'% (currMetar.present_weather(), currMetar.sky_conditions("\n- ")))
+        self.weatherBox.setProperty("markdown", '%s %s'% (currMetar.present_weather(), currMetar.sky_conditions()))
         self.remarksLabel = self.findChild(QtWidgets.QLabel, "remarks")
         self.remarksLabel.setProperty("text", "Remarks:")
         self.remarksBox = self.findChild(QtWidgets.QTextBrowser, "remarksBox")
-        self.remarksBox.setProperty("markdown", currMetar.remarks())
+        self.remarksBox.setProperty("markdown", "\n- %s" % currMetar.remarks("\n- "))
         
         
         metarDecoder(currMetar)
