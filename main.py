@@ -84,12 +84,18 @@ class MainWindow(QtWidgets.QDialog):
         self.weatherLabel = self.findChild(QtWidgets.QLabel, "weather")
         self.weatherLabel.setProperty("text", "Weather:")
         self.weatherBox = self.findChild(QtWidgets.QTextBrowser, "weatherBox")
-        self.weatherBox.setProperty("markdown", '%s %s'% (currMetar.present_weather(), currMetar.sky_conditions()))
+        self.weatherBox.setProperty("markdown", '%s \n %s'% (currMetar.present_weather(), currMetar.sky_conditions()))
         self.remarksLabel = self.findChild(QtWidgets.QLabel, "remarks")
         self.remarksLabel.setProperty("text", "Remarks:")
         self.remarksBox = self.findChild(QtWidgets.QTextBrowser, "remarksBox")
         self.remarksBox.setProperty("markdown", "\n- %s" % currMetar.remarks("\n- "))
         
+        # set time labels
+        self.metarLabel = self.findChild(QtWidgets.QLabel, "METARlabel")
+        self.metarLabel.setProperty("text", "METAR: ")
+        self.metarTime = self.findChild(QtWidgets.QLabel, "metarTime")
+        self.metarTime.setProperty("text", currMetar.time.ctime())
+        # FIND A WAY TO GET CURRENT ZULU TIME IN A DIFFERENT THREAD THAT RUNS EVERY MINUTE OR SO
         
         metarDecoder(currMetar)
 
