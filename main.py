@@ -6,6 +6,7 @@ from metar import Metar
 import sys
 from PyQt5 import QtCore, QtGui, uic, QtWidgets
 import pyqtgraph as pg
+import debugpy
 
 # Windows installing metar package:
 # git clone https://github.com/python-metar/python-metar
@@ -57,9 +58,14 @@ class MainWindow(QtWidgets.QDialog):
         # self.weatherBox.setMarkdown("" + SLCMetar.sky_conditions())
         # self.remarksBox.setMarkdown("" + SLCMetar.remarks())
         
-        self.worker = WorkerThread()
-        self.worker.start()
-        self.worker.update_progress.connect(self.updateAPIValues)#sends emitted variable to the function
+        self.workerAPI = APIThread()
+        self.workerAPI.start()
+        self.workerAPI.update_API_signal.connect(self.updateAPIValues)#sends emitted variable to the function
+        
+        self.workerZULU = ZULUTimeThread()
+        self.workerZULU.start()
+        self.workerZULU.update_ZULU_signal.connect(self.updateZULUTime)
+        
         
     def updateAPIValues(self, listOfMetars): #listOfMetars is the emitted var
         currMetar : Metar.Metar = listOfMetars[0]
@@ -99,15 +105,33 @@ class MainWindow(QtWidgets.QDialog):
         
         metarDecoder(currMetar)
 
-class WorkerThread(QtCore.QThread):
-    update_progress = QtCore.pyqtSignal(list)
+    def updateZULUTime(self, zuluTime):
+        self.ZULULabel = self.findChild(QtWidgets.QLabel, "ZULU")
+        self.ZULULabel.setProperty("text", "ZULU: ")
+        self.ZULUTime = self.findChild(QtWidgets.QLabel, "ZULUTime")
+        self.ZULUTime.setProperty("text", zuluTime)
+        
+class APIThread(QtCore.QThread):
+    update_API_signal = QtCore.pyqtSignal(list)
     loopDuration : int = 5 #Unit: sec
     starttime = time.time()
     emittedList = []
     def run(self):
         while True:
             emittedList = aviationWeatherAPI()
-            self.update_progress.emit(emittedList)
+            self.update_API_signal.emit(emittedList)
+            time.sleep(self.loopDuration - ((time.time() - self.starttime) % self.loopDuration)) 
+
+class ZULUTimeThread(QtCore.QThread):
+    update_ZULU_signal = QtCore.pyqtSignal(str)
+    loopDuration : int = 15 #Unit: sec
+    startTime = time.time()
+    
+    def run(self):
+        #debugpy.debug_this_thread()
+        while True:
+            emittedStr = datetime.datetime.now(tz=datetime.timezone.utc).ctime()
+            self.update_ZULU_signal.emit(emittedStr)
             time.sleep(self.loopDuration - ((time.time() - self.starttime) % self.loopDuration)) 
             
             
