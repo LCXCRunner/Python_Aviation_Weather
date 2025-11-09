@@ -4,7 +4,7 @@ import datetime
 import geocoder
 from metar import Metar
 import sys
-from PyQt5 import QtCore, QtGui, uic, QtWidgets
+from PyQt6 import QtCore, QtGui, uic, QtWidgets
 import pyqtgraph as pg
 import debugpy
 
@@ -58,13 +58,13 @@ class MainWindow(QtWidgets.QDialog):
         # self.weatherBox.setMarkdown("" + SLCMetar.sky_conditions())
         # self.remarksBox.setMarkdown("" + SLCMetar.remarks())
         
-        self.workerAPI = APIThread()
-        self.workerAPI.start()
-        self.workerAPI.update_API_signal.connect(self.updateAPIValues)#sends emitted variable to the function
+        # self.workerAPI = APIThread()
+        # self.workerAPI.start()
+        # self.workerAPI.update_API_signal.connect(self.updateAPIValues)#sends emitted variable to the function
         
-        self.workerZULU = ZULUTimeThread()
-        self.workerZULU.start()
-        self.workerZULU.update_ZULU_signal.connect(self.updateZULUTime)
+        # self.workerZULU = ZULUTimeThread()
+        # self.workerZULU.start()
+        # self.workerZULU.update_ZULU_signal.connect(self.updateZULUTime)
         
         
     def updateAPIValues(self, listOfMetars): #listOfMetars is the emitted var
@@ -219,5 +219,5 @@ def metarDecoder(metar : Metar.Metar):
         print("- " + metar.remarks("\n- "))   
 
 if __name__ == "__main__":
-    aviationWeatherAPI()
+    # aviationWeatherAPI()
     main()

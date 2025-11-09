@@ -1,1 +1,0 @@
-Ui_MainWindow, QtBaseClass=uic.loadUiType(qtCreatorFile)
