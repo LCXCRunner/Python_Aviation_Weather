@@ -1,0 +1,65 @@
+* {
+    box-sizing: border-box;
+    /* outline: red solid 1px; */
+}
+
+body {
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+    background: linear-gradient(to bottom, #87CEEB 0%, #E0F6FF 50%, #F0F8FF 100%);
+    min-height: 100vh;
+}
+
+.container {
+    display: flex;
+    justify-content: space-between;
+    padding: 20px;
+}
+
+.column1, .column2, .column3 {
+    flex: 1;
+    flex-direction: row;
+    margin: 0 10px;
+    padding: 20px;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    background: linear-gradient(135deg, #f5f7fa, #c3cfe2, #a8b8c8, #8395a7);
+}
+
+h2 {
+    font-size: 1.5em;
+    margin-bottom: 10px;
+    text-align: center;
+}
+
+.airportData {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+}
+
+.data-row {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 5px 0;
+    border-bottom: 1px solid #ddd;
+}
+
+.data-row:last-child {
+    border-bottom: none;
+}
+
+.label {
+    font-weight: bold;
+    color: #333;
+    flex-shrink: 0;
+    min-width: 120px;
+}
+
+.value {
+    text-align: right;
+    color: #333;
+    font-family: 'Courier New', monospace;
+}
