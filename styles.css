@@ -63,3 +63,34 @@ h2 {
     color: #333;
     font-family: 'Courier New', monospace;
 }
+
+.refreshButton {
+    display: flex;
+    justify-content: center;
+    padding: 20px;
+    margin: 0 30px;
+}
+
+.refreshButton button {
+    width: 100%;
+    max-width: 800px;
+    padding: 15px 30px;
+    background-color: #4A90E2;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    font-size: 16px;
+    font-weight: bold;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+}
+
+.refreshButton button:hover {
+    background-color: #357ABD;
+}
+
+.refreshButton button:active {
+    transform: translateY(1px);
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.2);
+}

@@ -1,5 +1,0 @@
-QDialog {
-    background-image: url("clouds_background.jpg"); 
-    background-repeat: no-repeat; 
-    background-position: center;
-}
