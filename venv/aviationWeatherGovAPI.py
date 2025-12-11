@@ -18,33 +18,18 @@ def index():
     # Replace "Airport 1" with "KSLC" in the first h2 tag
     html_content = html_content.replace('<h2>Airport 1</h2>', '<h2>KSLC</h2>', 1)
     
-    # Add JavaScript to send request to Flask when button is clicked
-    refresh_script = """
-    <script>
-        document.addEventListener('DOMContentLoaded', function() {
-            const refreshBtn = document.querySelector('.refreshButton button');
-            if (refreshBtn) {
-                refreshBtn.addEventListener('click', function() {
-                    // Send request to Flask server
-                    fetch('/button-click')
-                        .then(response => response.text())
-                        .then(data => {
-                            console.log('Flask responded:', data);
-                            location.reload();
-                        });
-                });
-            }
-        });
-    </script>
-</body>"""
-    html_content = html_content.replace('</body>', refresh_script)
-    
     return render_template_string(html_content)
 
 @app.route('/styles.css')
 def stylesheet():
     # Serve the CSS file from parent directory
     return send_from_directory(parent_dir, 'styles.css')
+
+@app.route('/Typescript/testfile.js')
+def javascript():
+    # Serve the JavaScript file from Typescript directory
+    typescript_dir = os.path.join(parent_dir, 'Typescript')
+    return send_from_directory(typescript_dir, 'testfile.js')
 
 @app.route('/button-click')
 def button_click():
