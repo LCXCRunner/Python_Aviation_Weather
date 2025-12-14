@@ -1,0 +1,31 @@
+{
+    "version": "0.2.0",
+    "configurations": [
+        {
+            "name": "Python: Debug Metar.py",
+            "type": "debugpy",
+            "request": "launch",
+            "program": "${workspaceFolder}/venv/Metar.py",
+            "console": "integratedTerminal",
+            "justMyCode": false
+        },
+        {
+            "name": "Python: Flask Debug",
+            "type": "debugpy",
+            "request": "launch",
+            "program": "${workspaceFolder}/venv/aviationWeatherGovAPI.py",
+            "console": "integratedTerminal",
+            "justMyCode": false,
+            "env": {
+                "FLASK_ENV": "development", 
+                "FLASK_APP": "aviationWeatherGovAPI.py",
+                "Flask_DEBUG": "0"
+            }, 
+            "args": [
+                "run",
+                "--no-debugger",
+                "--no-reload"
+            ]
+        }
+    ]
+}

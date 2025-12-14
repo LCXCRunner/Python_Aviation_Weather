@@ -1,5 +1,7 @@
 from flask import Flask, render_template_string, send_from_directory
 import os
+import requests
+from requests.models import Response
 
 # Set the parent directory as the root folder for templates and static files
 parent_dir = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
@@ -34,11 +36,18 @@ def javascript():
 @app.route('/button-click')
 def button_click():
     # This runs on the server when the button is clicked
-    print('hello world')
+    url : str = "https://aviationweather.gov/api/data/metar?ids=KSLC%2CKHIF%2CKOGD&format=json&taf=false&hours=2.0&date=20251213_1130"
+
+    response : Response = requests.get(url)
+    data : dict = response.json()
+    print("Button clicked! Fetched data:")
+    # print("KSLC METAR:", data['data'][0]['raw_text'])
+    # print("KHIF METAR:", data['data'][1]['raw_text'])
+    # print("KOGD METAR:", data['data'][2]['raw_text'])
     return 'OK'
 
 if __name__ == '__main__':
     print("Starting simple Flask app...")
     print(f"Serving files from: {parent_dir}")
     print("Visit http://localhost:5000 to view the page")
-    app.run(debug=True, host='0.0.0.0', port=5000)
+    app.run(host='0.0.0.0', port=5000)
