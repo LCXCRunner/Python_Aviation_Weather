@@ -3,34 +3,34 @@ from requests.models import Response
 from datetime import datetime, timezone
 
 class Metar:
-    def __init__(self, airports : str, format : str, hoursBack : float, dateTimeZulu : str) -> None:
+    def __init__(self, airport : str, format : str, hoursBack : float) -> None:
         """
         Initialize Metar object with given parameters.
         
         Args:
             airports (str): Single airport code (e.g., 'KSLC').
             format (str): Data format (e.g., 'json').
-            taf (bool): Whether to include TAF data.
             hours (float): Number of hours for data retrieval.
-            date (str): Date string. Format: 'YYYYMMDD_HHMM'.
         """
         # Store parameters
-        self.airports : str = airports
+        self.airports : str = airport
         self.format : str = format
         self.taf : bool = False
         self.hours : float = hoursBack
-        self.date : str = dateTimeZulu
+        # Find Zulu time
+        self.zuluTime : str = datetime.now(timezone.utc).strftime('%Y%m%d_%H%M')
+        self.zuluTimeReadable : str = datetime.now(timezone.utc).strftime('%B %d, %Y %H:%M UTC')
 
         # Construct the API URL
-        self.url : str = "https://aviationweather.gov/api/data/metar?ids=" + airports + \
-                        f"&format={format}&taf={str(self.taf).lower()}&hours={hoursBack}&date={dateTimeZulu}"
+        self.url : str = "https://aviationweather.gov/api/data/metar?ids=" + airport + \
+                        f"&format={format}&taf={str(self.taf).lower()}&hours={hoursBack}&date={self.zuluTime}"
         self.request : Response = requests.get(self.url)
         self.data : dict = self.request.json()
 
         # data decoded from the API
         # Observation Time, Temperature, Dewpoint
         self.observationTime : str = self.data[0]['obsTime'] # note that this is in UNIX time format
-        self.observationTime = datetime.fromtimestamp(int(self.observationTime)).strftime('%B %d, %Y %H:%M UTC') # Month Day, Year Hour:Minute UTC
+        self.observationTime = datetime.fromtimestamp(int(self.observationTime), timezone.utc).strftime('%B %d, %Y %H:%M UTC') # Month Day, Year Hour:Minute UTC
         self.temperatureC : float = self.data[0]['temp']
         self.dewpointC : float = self.data[0]['dewp']
 
@@ -52,7 +52,12 @@ class Metar:
             self.windGustKts : float = 0.0
 
         self.visibilityStatuteMiles : float = self.data[0]['visib']
-        # self.clouds : list = self.data[0][''] # TODO: implement clouds parsing
+        
+        # Clouds
+        if 'clouds' in self.data[0]:
+            self.clouds : str = self.decodeClouds(self.data[0]['clouds'])
+        else:
+            self.clouds : str = "No cloud data available"
 
         if 'wx_string' in self.data[0]:
             self.weather : str = self.decodeWeather(self.data[0]['wx_string'])
@@ -61,7 +66,62 @@ class Metar:
 
         # Flight Category
         self.flightCategory : str = self.data[0]['fltCat']
+
+    def decodeClouds(self, clouds_data: list[dict]) -> str:
+        """
+        Decode cloud information from METAR data.
         
+        Args:
+            clouds_data (list): List of cloud layer dictionaries from METAR data.
+        Returns:
+            str: Human-readable cloud description.
+        """
+        # Cloud coverage abbreviations
+        coverage_codes = {
+            'CLR': 'Clear',
+            'CAVOK': 'Ceiling and Visibility OK',
+            'FEW': 'Few',
+            'SCT': 'Scattered',
+            'BKN': 'Broken',
+            'OVC': 'Overcast',
+            'OVX': 'Sky Obscured'
+        }
+        
+        # If no cloud data, return clear
+        if not clouds_data or len(clouds_data) == 0:
+            return 'Clear skies'
+        
+        # Build cloud description for each layer
+        cloud_layers = []
+        
+        for layer in clouds_data:
+            cover = layer.get('cover', None)
+            base = layer.get('base', None)
+            top = layer.get('top', None)
+            
+            # Get human-readable coverage
+            coverage_text = coverage_codes.get(cover, cover)
+            
+            # Special cases for clear conditions
+            if cover in ['CLR', 'CAVOK']:
+                return coverage_text
+            
+            # Build layer description
+            layer_desc = coverage_text
+            
+            if base is not None:
+                layer_desc += f" at {base:,} ft"
+            
+            if top is not None:
+                layer_desc += f" (tops {top:,} ft)"
+            
+            cloud_layers.append(layer_desc)
+        
+        # Join all layers with semicolons
+        if cloud_layers:
+            return '; '.join(cloud_layers)
+        else:
+            return 'No cloud data available'
 
     def decodeWeather(self, weather_string: str) -> str:
         """
@@ -193,13 +253,11 @@ class Metar:
         result = ' '.join(result_parts)
         return result.capitalize() if result else weather_string
 
-
 if __name__ == "__main__":
-    metar : Metar = Metar("KSLC", "json", 2.0, "20251214_0400")
+    metar : Metar = Metar("KSLC", "json", 2.0)
     print(metar.url)
 
-    utc_now = datetime.now(timezone.utc)
-    print("Current UTC Time:", utc_now.strftime('%B %d, %Y %H:%M UTC')) # TODO: integrate into Metar class
+    print("Current UTC Time:", metar.zuluTimeReadable) 
 
     print("Fetched data:")
     print("KSLC METAR:", metar.data[0]['icaoId'])
@@ -213,7 +271,7 @@ if __name__ == "__main__":
     print("Density Altitude (ft):", metar.densityAltitude)
     print("Wind:", f"{metar.windDirectionDeg}° at {metar.windSpeedKts} kts, Gusts: {metar.windGustKts} kts")
     print("Visibility (statute miles):", metar.visibilityStatuteMiles)
-    # print("Clouds:", metar.clouds)
+    print("Clouds:", metar.clouds)
     print("Weather:", metar.weather)
     print("Flight Category:", metar.flightCategory)
     
