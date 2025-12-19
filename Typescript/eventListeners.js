@@ -3,25 +3,24 @@
 document.addEventListener('DOMContentLoaded', () => {
     // Get the button element by class name
     const refreshButton = document.querySelector('.refreshButton');
-    // Check if button exists
-    if (refreshButton) {
-        // Add click event listener
-        refreshButton.addEventListener('click', () => {
-            // Send request to Flask endpoint
-            fetch('/button-click')
-                .then(response => response.text())
-                .then(data => {
-                console.log('Flask responded:', data);
-                alert('Hello World');
-            })
-                .catch(error => {
-                console.error('Error calling Flask:', error);
-            });
-        });
-    }
-    else {
-        console.log('Button with class "refreshButton" not found');
-    }
+    // // Check if button exists
+    // if (refreshButton) {
+    //     // Add click event listener
+    //     refreshButton.addEventListener('click', () => {
+    //         // Send request to Flask endpoint
+    //         fetch('/button-click')
+    //             .then(response => response.text())
+    //             .then(data => {
+    //                 console.log('Flask responded:', data);
+    //                 alert('Hello World');
+    //             })
+    //             .catch(error => {
+    //                 console.error('Error calling Flask:', error);
+    //             });
+    //     });
+    // } else {
+    //     console.log('Button with class "refreshButton" not found');
+    // }
     // Add event listeners for airport input fields
     const airport1Input = document.getElementById('airport1');
     const airport2Input = document.getElementById('airport2');
@@ -60,6 +59,14 @@ document.addEventListener('DOMContentLoaded', () => {
         if (!airportCode || airportCode.trim() === '') {
             return;
         }
+        // Get the appropriate input field
+        let inputField = null;
+        if (columnNumber === 1)
+            inputField = airport1Input;
+        if (columnNumber === 2)
+            inputField = airport2Input;
+        if (columnNumber === 3)
+            inputField = airport3Input;
         fetch('/get-metar', {
             method: 'POST',
             headers: {
@@ -75,11 +82,21 @@ document.addEventListener('DOMContentLoaded', () => {
             }
             else {
                 console.error('Error fetching METAR:', data.error);
-                alert(`Error fetching METAR for ${airportCode}: ${data.error}`);
+                // Clear the input field if airport doesn't exist
+                if (inputField) {
+                    inputField.value = '';
+                    localStorage.removeItem(`airport${columnNumber}`);
+                }
+                alert(`Error: Airport "${airportCode}" not found or invalid.`);
             }
         })
             .catch(error => {
             console.error('Error calling Flask:', error);
+            // Clear the input field on network error
+            if (inputField) {
+                inputField.value = '';
+                localStorage.removeItem(`airport${columnNumber}`);
+            }
             alert(`Failed to fetch METAR data: ${error}`);
         });
     }

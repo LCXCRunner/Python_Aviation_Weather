@@ -36,13 +36,6 @@ def javascript():
     typescript_dir = os.path.join(parent_dir, 'Typescript')
     return send_from_directory(typescript_dir, 'eventListeners.js')
 
-@app.route('/button-click')
-def button_click():
-    firstMetar : Metar = Metar("KSLC", "json", 2.0)
-    secondMetar : Metar = Metar("KOGD", "json", 2.0)
-    thirdMetar : Metar = Metar("KHIF", "json", 2.0)
-    return 'OK'
-
 @app.route('/get-metar', methods=['POST'])
 def get_metar():
     """
