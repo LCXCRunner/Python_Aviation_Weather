@@ -26,6 +26,35 @@
                 "--no-debugger",
                 "--no-reload"
             ]
+        },
+        {
+            "name": "Chrome: Debug TypeScript",
+            "type": "chrome",
+            "request": "launch",
+            "url": "http://localhost:5000",
+            "webRoot": "${workspaceFolder}",
+            "sourceMaps": true,
+            "sourceMapPathOverrides": {
+                "/*": "${webRoot}/*"
+            }
+        },
+        {
+            "name": "Edge: Debug TypeScript",
+            "type": "msedge",
+            "request": "launch",
+            "url": "http://localhost:5000",
+            "webRoot": "${workspaceFolder}",
+            "sourceMaps": true,
+            "sourceMapPathOverrides": {
+                "/*": "${webRoot}/*"
+            }
+        }
+    ],
+    "compounds": [
+        {
+            "name": "Flask + TypeScript Debug",
+            "configurations": ["Python: Flask Debug", "Chrome: Debug TypeScript"],
+            "stopAll": true
         }
     ]
 }

@@ -5,15 +5,15 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Local Aviation Weather</title>
     <link rel="stylesheet" href="styles.css">
-    <script src="Typescript/testfile.js" defer></script>
+    <script type="module" src="Typescript/eventListeners.js" defer></script>
 </head>
 <body>
     <div class = "container">
         <div class="column1">
-            <h2>Airport 1</h2>
+            <input type="text" placeholder="Airport 1" class="airport-input" id="airport1">
             <div class="airportData">
                 <div class="data-row">
-                    <span class="label">Time:</span>
+                    <span class="label">Report Time:</span>
                     <span class="value">--:-- UTC</span>
                 </div>
                 <div class="data-row">
@@ -22,11 +22,11 @@
                 </div>
                 <div class="data-row">
                     <span class="label">Temperature:</span>
-                    <span class="value">-- °F</span>
+                    <span class="value">-- &deg;F</span>
                 </div>
                 <div class="data-row">
                     <span class="label">Dewpoint:</span>
-                    <span class="value">-- °F</span>
+                    <span class="value">-- &deg;F</span>
                 </div>
                 <div class="data-row">
                     <span class="label">Altimeter Setting:</span>
@@ -62,10 +62,10 @@
             </div>
         </div>
         <div class="column2">
-            <h2>Airport 2</h2>
+            <input type="text" placeholder="Airport 2" class="airport-input" id="airport2">
             <div class="airportData">
                 <div class="data-row">
-                    <span class="label">Time:</span>
+                    <span class="label">Report Time:</span>
                     <span class="value">--:-- UTC</span>
                 </div>
                 <div class="data-row">
@@ -74,11 +74,11 @@
                 </div>
                 <div class="data-row">
                     <span class="label">Temperature:</span>
-                    <span class="value">-- °F</span>
+                    <span class="value">-- &deg;F</span>
                 </div>
                 <div class="data-row">
                     <span class="label">Dewpoint:</span>
-                    <span class="value">-- °F</span>
+                    <span class="value">-- &deg;F</span>
                 </div>
                 <div class="data-row">
                     <span class="label">Altimeter Setting:</span>
@@ -114,10 +114,10 @@
             </div>
         </div>
         <div class="column3">
-            <h2>Airport 3</h2>
+            <input class="airport-input" type="text" placeholder="Airport 3" id="airport3">
             <div class="airportData">
                 <div class="data-row">
-                    <span class="label">Time:</span>
+                    <span class="label">Report Time:</span>
                     <span class="value">--:-- UTC</span>
                 </div>
                 <div class="data-row">
@@ -126,11 +126,11 @@
                 </div>
                 <div class="data-row">
                     <span class="label">Temperature:</span>
-                    <span class="value">-- °F</span>
+                    <span class="value">-- &deg;F</span>
                 </div>
                 <div class="data-row">
                     <span class="label">Dewpoint:</span>
-                    <span class="value">-- °F</span>
+                    <span class="value">-- &deg;F</span>
                 </div>
                 <div class="data-row">
                     <span class="label">Altimeter Setting:</span>
@@ -165,6 +165,9 @@
                 </div>
             </div>
         </div>
+    </div>
+    <div class="zuluTime">
+        <span id="zuluTimeDisplay">--:-- UTC</span>
     </div>
     <div class="refreshButton">
         <button id="refreshBtn">Refresh Data</button>
