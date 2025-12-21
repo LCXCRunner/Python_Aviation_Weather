@@ -167,4 +167,30 @@ document.addEventListener('DOMContentLoaded', () => {
             }
         });
     }
+
+    // Update UTC time display every second
+    function updateZuluTime() {
+        const now = new Date();
+        const monthNames = ['January', 'February', 'March', 'April', 'May', 'June', 
+                          'July', 'August', 'September', 'October', 'November', 'December'];
+        const utcDay = now.getUTCDate();
+        const utcMonth = monthNames[now.getUTCMonth()];
+        const hours = String(now.getUTCHours()).padStart(2, '0');
+        const minutes = String(now.getUTCMinutes()).padStart(2, '0');
+        const seconds = String(now.getUTCSeconds()).padStart(2, '0');
+        
+        const zuluTimeDisplay = document.getElementById('zuluTimeDisplay');
+        if (zuluTimeDisplay) {
+            zuluTimeDisplay.textContent = `${utcMonth} ${utcDay} - ${hours}:${minutes}:${seconds} UTC`;
+        }
+    }
+
+    // Update immediately and then every second
+    updateZuluTime();
+    setInterval(updateZuluTime, 1000);
+
+    // Auto-refresh page every 15 minutes (900000 milliseconds)
+    setInterval(() => {
+        location.reload();
+    }, 900000);
 });

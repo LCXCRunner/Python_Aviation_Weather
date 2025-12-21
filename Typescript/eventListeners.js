@@ -1,26 +1,6 @@
 // Event listener for refreshButton class
 // Wait for DOM to load
 document.addEventListener('DOMContentLoaded', () => {
-    // Get the button element by class name
-    const refreshButton = document.querySelector('.refreshButton');
-    // // Check if button exists
-    // if (refreshButton) {
-    //     // Add click event listener
-    //     refreshButton.addEventListener('click', () => {
-    //         // Send request to Flask endpoint
-    //         fetch('/button-click')
-    //             .then(response => response.text())
-    //             .then(data => {
-    //                 console.log('Flask responded:', data);
-    //                 alert('Hello World');
-    //             })
-    //             .catch(error => {
-    //                 console.error('Error calling Flask:', error);
-    //             });
-    //     });
-    // } else {
-    //     console.log('Button with class "refreshButton" not found');
-    // }
     // Add event listeners for airport input fields
     const airport1Input = document.getElementById('airport1');
     const airport2Input = document.getElementById('airport2');
@@ -177,6 +157,28 @@ document.addEventListener('DOMContentLoaded', () => {
             }
         });
     }
+    // Update UTC time display every second
+    function updateZuluTime() {
+        const now = new Date();
+        const monthNames = ['January', 'February', 'March', 'April', 'May', 'June',
+            'July', 'August', 'September', 'October', 'November', 'December'];
+        const utcDay = now.getUTCDate();
+        const utcMonth = monthNames[now.getUTCMonth()];
+        const hours = String(now.getUTCHours()).padStart(2, '0');
+        const minutes = String(now.getUTCMinutes()).padStart(2, '0');
+        const seconds = String(now.getUTCSeconds()).padStart(2, '0');
+        const zuluTimeDisplay = document.getElementById('zuluTimeDisplay');
+        if (zuluTimeDisplay) {
+            zuluTimeDisplay.textContent = `${utcMonth} ${utcDay} - ${hours}:${minutes}:${seconds} UTC`;
+        }
+    }
+    // Update immediately and then every second
+    updateZuluTime();
+    setInterval(updateZuluTime, 1000);
+    // Auto-refresh page every 15 minutes (900000 milliseconds)
+    setInterval(() => {
+        location.reload();
+    }, 900000);
 });
 export {};
 //# sourceMappingURL=eventListeners.js.map
