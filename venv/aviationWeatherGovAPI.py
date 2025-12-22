@@ -79,3 +79,53 @@ if __name__ == '__main__':
     print(f"Serving files from: {parent_dir}")
     print("Visit http://localhost:5000 to view the page")
     app.run(host='0.0.0.0', port=5000)
+
+    # to get it running on the pi: 
+
+# Create a systemd service
+# sudo nano /etc/systemd/system/flaskapp.service
+
+# paste this into the file, make sure the filepaths match
+
+# [Unit]
+# Description=Flask App
+# After=network-online.target
+
+# [Service]
+# User=jakeg
+# WorkingDirectory=/home/jakeg/Documents/Python_Aviation_Weather
+# ExecStart=/usr/bin/python /home/jakeg/Documents/Python_Aviation_Weather/venv/aviationWeatherGovA>
+# Restart=always
+# Environment="FLASK_ENV=production"
+
+# [Install]
+# WantedBy=multi-user.target
+
+
+# save it and exit
+
+# Enable it: 
+# sudo systemctl enable flaskapp.service
+# sudo systemctl start flaskapp.service
+
+# Check that it is enabled:
+# systemctl status flaskapp.service
+
+# restart it if needed and then check if it is running again:
+# sudo systemctl daemon-reload
+# sudo systemctl restart flaskapp.service
+# systemctl status flaskapp.service
+
+
+# next, create an executable file on the desktop of the pi
+
+#!/bin/bash
+
+# Optional: wait a few seconds if Flask just started
+# sleep 3
+
+# Launch Chromium to local Flask app in fullscreen
+# /usr/bin/chromium-browser http://localhost:5000 --start-fullscreen --disable-gpu --disable-software-rasterizer --disable-accelerated-2d-canvas --disable-infobars --disable-session-crashed-bubble --no-sandbox --force-device-scale-factor=0.67
+
+# make it executable
+# chmod +x /home/jakeg/Desktop/launch_flask_app.sh
