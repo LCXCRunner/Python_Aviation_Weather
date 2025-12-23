@@ -202,6 +202,9 @@ Weather data is retrieved from the [Aviation Weather Center API](https://aviatio
 | Power Supply | 5V 3A USB-C | 1 | Power for Raspberry Pi |
 | MicroSD Card | 32GB Class 10 | 1 | Operating system storage |
 
+[Electrical Connects 1](Visual_Assets/piToDisplayConnnections1.jpg)
+[Electrical Connects 2](Visual_Assets/piToDisplayConnnections2.jpg)
+
 Note: these are simply the parts used for the original build. A smaller computer or SD card are easily possible. Though, a different form factor computer will not fit in the 3D printed case as easily. 
 
 ### 3D Printed Parts
@@ -212,11 +215,11 @@ Note: these are simply the parts used for the original build. A smaller computer
 
 | Component | File | Quantity | Picture | 
 |-----------|-------------|----------|---------|
-| Screen Holder | "Screen Holder.stl | 1 |  |
-| Screen Back | "Screen Back.stl" | 1 | "" |
-| Pi Cover | "Pi Cover.stl" | 1 | "" |
-| Pi Cover Top | "Pi Cover Top.stl | 1 | "" |
-| Full Print Settings | "Python_Aviation_Weather_Full_Print.3mf | 1 | "" |
+| Screen Holder | "Screen Holder.stl | 1 | [Screen Holder Photo](Visual_Assets/screenHolder.jpg) |
+| Screen Back | "Screen Back.stl" | 1 | [Screen Back Photo](Visual_Assets/screenBack.jpg) |
+| Pi Cover | "Pi Cover.stl" | 1 | [Pi Cover](Visual_Assets/piCover.jpg) |
+| Pi Cover Top | "Pi Cover Top.stl | 1 | [Pi Cover Top Photo](Visual_Assets/piCoverTop.jpg) |
+| Full Print Settings | "Python_Aviation_Weather_Full_Print.3mf | 1 | [Exploded View](Visual_Assets/exploded.jpg) |
 
 ### Fasteners
 
@@ -226,7 +229,7 @@ Note: these are simply the parts used for the original build. A smaller computer
 | M3 x 5mm | 4 |
 | M2.5 x 20+3mm Stand off| 4 |
 
-<a href="Visual_Assets/fasteners.jpg" target="_blank">View fasteners photo</a>
+[View fasteners photo](Visual_Assets/fasteners.jpg)
 
 
 ## Author
