@@ -13,7 +13,7 @@
             "name": "Python: Flask Debug",
             "type": "debugpy",
             "request": "launch",
-            "program": "${workspaceFolder}/venv/aviationWeatherGovAPI.py",
+            "program": "${workspaceFolder}/aviationWeatherGovAPI.py",
             "console": "integratedTerminal",
             "justMyCode": false,
             "env": {

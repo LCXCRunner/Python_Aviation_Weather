@@ -1,4 +1,7 @@
-// Event listener for refreshButton class
+// don't forget to compile the TypeScript file to JavaScript using tsc
+
+// To debug, make sure your launch.json in .vscode is set up correctly to run Flask app
+// Select the Flask + TypeScript Debug configuration before running
 
 // Wait for DOM to load
 document.addEventListener('DOMContentLoaded', () => {

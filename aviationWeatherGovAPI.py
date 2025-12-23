@@ -4,8 +4,11 @@ import requests
 from requests.models import Response
 from Metar import Metar
 
-# Set the parent directory as the root folder for templates and static files
-parent_dir = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
+# to debug, you will need the proper launch.json config in .vscode folder
+# make sure to swap to the Python: Flask Debug configuration in the debug tab
+
+# Set the current directory as the root folder for templates and static files
+parent_dir = os.path.dirname(os.path.abspath(__file__))
 
 app = Flask(__name__, 
             static_folder=parent_dir,
@@ -13,11 +16,6 @@ app = Flask(__name__,
 
 @app.route('/')
 def index():
-    # # grab the metar data as the page loads
-    # firstMetar : Metar = Metar("KSLC", "json", 2.0)
-    # secondMetar : Metar = Metar("KOGD", "json", 2.0)
-    # thirdMetar : Metar = Metar("KHIF", "json", 2.0)
-
     # Read the HTML file from parent directory
     html_path = os.path.join(parent_dir, 'index.html')
     with open(html_path, 'r') as f:
