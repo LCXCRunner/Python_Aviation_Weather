@@ -212,7 +212,7 @@ Note: these are simply the parts used for the original build. A smaller computer
 
 | Component | File | Quantity | Picture | 
 |-----------|-------------|----------|---------|
-| Screen Holder | "Screen Holder.stl | 1 | "" |
+| Screen Holder | "Screen Holder.stl | 1 |  |
 | Screen Back | "Screen Back.stl" | 1 | "" |
 | Pi Cover | "Pi Cover.stl" | 1 | "" |
 | Pi Cover Top | "Pi Cover Top.stl | 1 | "" |
@@ -226,7 +226,7 @@ Note: these are simply the parts used for the original build. A smaller computer
 | M3 x 5mm | 4 |
 | M2.5 x 20+3mm Stand off| 4 |
 
-[View fasteners photo](Visual_Assets/fasteners.jpg)
+<a href="Visual_Assets/fasteners.jpg" target="_blank">View fasteners photo</a>
 
 
 ## Author
