@@ -132,8 +132,8 @@ The project includes instructions for deploying on a Raspberry Pi as a fullscree
    NOTE: F11 to exit fullscreen mode
 
 4. **Changing the .service file will require you to restart the systemctl deamon if you are troubleshooting**
-    ```bash
     restart it if needed and then check if it is running again:
+    ```bash
     sudo systemctl daemon-reload
     sudo systemctl restart flaskapp.service
     systemctl status flaskapp.service
