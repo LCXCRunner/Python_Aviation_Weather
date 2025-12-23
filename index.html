@@ -1,0 +1,173 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Local Aviation Weather</title>
+    <link rel="stylesheet" href="styles.css">
+    <script type="module" src="Typescript/eventListeners.js" defer></script>
+</head>
+<body>
+    <div class = "container">
+        <div class="column1">
+            <input type="text" placeholder="Airport 1" class="airport-input" id="airport1">
+            <div class="airportData">
+                <div class="data-row">
+                    <span class="label">Report Time:</span>
+                    <span class="value">--:-- UTC</span>
+                </div>
+                <div class="data-row">
+                    <span class="label">Flight Category:</span>
+                    <span class="value">-- </span>
+                </div>
+                <div class="data-row">
+                    <span class="label">Temperature:</span>
+                    <span class="value">-- &deg;F</span>
+                </div>
+                <div class="data-row">
+                    <span class="label">Dewpoint:</span>
+                    <span class="value">-- &deg;F</span>
+                </div>
+                <div class="data-row">
+                    <span class="label">Altimeter Setting:</span>
+                    <span class="value">-- inHg</span>
+                </div>
+                <div class="data-row">
+                    <span class="label">Pressure Altitude:</span>
+                    <span class="value">-- ft</span>
+                </div>
+                <div class="data-row">
+                    <span class="label">Density Altitude:</span>
+                    <span class="value">-- ft</span>
+                </div>
+                <div class="data-row">
+                    <span class="label">Wind:</span>
+                    <div class="windColumn">
+                        <span class="value">-- @ -- kts</span>
+                        <span class="value"> Gusts: -- kts</span>
+                    </div>
+                </div>
+                <div class="data-row">
+                    <span class="label">Visibility:</span>
+                    <span class="value">-- SM</span>
+                </div>
+                <div class="data-row">
+                    <span class="label">Clouds:</span>
+                    <span class="value">--</span>
+                </div>
+                <div class="data-row">
+                    <span class="label">Weather:</span>
+                    <span class="value">--</span>
+                </div>
+            </div>
+        </div>
+        <div class="column2">
+            <input type="text" placeholder="Airport 2" class="airport-input" id="airport2">
+            <div class="airportData">
+                <div class="data-row">
+                    <span class="label">Report Time:</span>
+                    <span class="value">--:-- UTC</span>
+                </div>
+                <div class="data-row">
+                    <span class="label">Flight Category:</span>
+                    <span class="value">-- </span>
+                </div>
+                <div class="data-row">
+                    <span class="label">Temperature:</span>
+                    <span class="value">-- &deg;F</span>
+                </div>
+                <div class="data-row">
+                    <span class="label">Dewpoint:</span>
+                    <span class="value">-- &deg;F</span>
+                </div>
+                <div class="data-row">
+                    <span class="label">Altimeter Setting:</span>
+                    <span class="value">-- inHg</span>
+                </div>
+                <div class="data-row">
+                    <span class="label">Pressure Altitude:</span>
+                    <span class="value">-- ft</span>
+                </div>
+                <div class="data-row">
+                    <span class="label">Density Altitude:</span>
+                    <span class="value">-- ft</span>
+                </div>
+                <div class="data-row">
+                    <span class="label">Wind:</span>
+                    <div class="windColumn">
+                        <span class="value">-- @ -- kts</span>
+                        <span class="value"> Gusts: -- kts</span>
+                    </div>
+                </div>
+                <div class="data-row">
+                    <span class="label">Visibility:</span>
+                    <span class="value">-- SM</span>
+                </div>
+                <div class="data-row">
+                    <span class="label">Clouds:</span>
+                    <span class="value">--</span>
+                </div>
+                <div class="data-row">
+                    <span class="label">Weather:</span>
+                    <span class="value">--</span>
+                </div>
+            </div>
+        </div>
+        <div class="column3">
+            <input class="airport-input" type="text" placeholder="Airport 3" id="airport3">
+            <div class="airportData">
+                <div class="data-row">
+                    <span class="label">Report Time:</span>
+                    <span class="value">--:-- UTC</span>
+                </div>
+                <div class="data-row">
+                    <span class="label">Flight Category:</span>
+                    <span class="value">-- </span>
+                </div>
+                <div class="data-row">
+                    <span class="label">Temperature:</span>
+                    <span class="value">-- &deg;F</span>
+                </div>
+                <div class="data-row">
+                    <span class="label">Dewpoint:</span>
+                    <span class="value">-- &deg;F</span>
+                </div>
+                <div class="data-row">
+                    <span class="label">Altimeter Setting:</span>
+                    <span class="value">-- inHg</span>
+                </div>
+                <div class="data-row">
+                    <span class="label">Pressure Altitude:</span>
+                    <span class="value">-- ft</span>
+                </div>
+                <div class="data-row">
+                    <span class="label">Density Altitude:</span>
+                    <span class="value">-- ft</span>
+                </div>
+                <div class="data-row">
+                    <span class="label">Wind:</span>
+                    <div class="windColumn">
+                        <span class="value">-- @ -- kts</span>
+                        <span class="value"> Gusts: -- kts</span>
+                    </div>
+                </div>
+                <div class="data-row">
+                    <span class="label">Visibility:</span>
+                    <span class="value">-- SM</span>
+                </div>
+                <div class="data-row">
+                    <span class="label">Clouds:</span>
+                    <span class="value">--</span>
+                </div>
+                <div class="data-row">
+                    <span class="label">Weather:</span>
+                    <span class="value">--</span>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="zuluTime">
+        <span id="zuluTimeDisplay">--:-- UTC</span>
+    </div>
+</body>
+</html>

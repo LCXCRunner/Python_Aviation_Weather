@@ -1,8 +1,0 @@
-# pip install -r requirements.txt
-
-requests==2.32.5
-geocoder==1.38.1
-python-metar==1.4.0
-PyQt6==6.10.0
-pyqtgraph==0.13.7
-debugpy==1.8.17

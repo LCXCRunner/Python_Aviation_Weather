@@ -1,3 +1,5 @@
+# python specific ignores
+__pycache__/
 /venv/Scripts
 /venv/Lib
 /venv/Include

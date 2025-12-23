@@ -1,0 +1,60 @@
+{
+    "version": "0.2.0",
+    "configurations": [
+        {
+            "name": "Python: Debug Metar.py",
+            "type": "debugpy",
+            "request": "launch",
+            "program": "${workspaceFolder}/venv/Metar.py",
+            "console": "integratedTerminal",
+            "justMyCode": false
+        },
+        {
+            "name": "Python: Flask Debug",
+            "type": "debugpy",
+            "request": "launch",
+            "program": "${workspaceFolder}/aviationWeatherGovAPI.py",
+            "console": "integratedTerminal",
+            "justMyCode": false,
+            "env": {
+                "FLASK_ENV": "development", 
+                "FLASK_APP": "aviationWeatherGovAPI.py",
+                "Flask_DEBUG": "0"
+            }, 
+            "args": [
+                "run",
+                "--no-debugger",
+                "--no-reload"
+            ]
+        },
+        {
+            "name": "Chrome: Debug TypeScript",
+            "type": "chrome",
+            "request": "launch",
+            "url": "http://localhost:5000",
+            "webRoot": "${workspaceFolder}",
+            "sourceMaps": true,
+            "sourceMapPathOverrides": {
+                "/*": "${webRoot}/*"
+            }
+        },
+        {
+            "name": "Edge: Debug TypeScript",
+            "type": "msedge",
+            "request": "launch",
+            "url": "http://localhost:5000",
+            "webRoot": "${workspaceFolder}",
+            "sourceMaps": true,
+            "sourceMapPathOverrides": {
+                "/*": "${webRoot}/*"
+            }
+        }
+    ],
+    "compounds": [
+        {
+            "name": "Flask + TypeScript Debug",
+            "configurations": ["Python: Flask Debug", "Chrome: Debug TypeScript"],
+            "stopAll": true
+        }
+    ]
+}

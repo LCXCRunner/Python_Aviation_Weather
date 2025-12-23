@@ -1,0 +1,126 @@
+* {
+    box-sizing: border-box;
+    /* outline: red solid 1px; */
+}
+
+body {
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+    background: linear-gradient(to bottom, #87CEEB 0%, #E0F6FF 50%, #F0F8FF 100%);
+    min-height: 100vh;
+}
+
+.container {
+    display: flex;
+    justify-content: space-between;
+    padding: 20px;
+}
+
+.column1, .column2, .column3 {
+    flex: 1;
+    flex-direction: row;
+    margin: 0 10px;
+    padding: 20px;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    background: linear-gradient(135deg, #f5f7fa, #c3cfe2, #a8b8c8, #8395a7);
+}
+
+h2 {
+    font-size: 1.5em;
+    margin-bottom: 10px;
+    text-align: center;
+}
+
+.airport-input {
+    margin-top: 0;
+    margin-bottom: 15px;
+    font-size: 1.5em;
+    color: #333;
+    text-align: center;
+    width: 100%;
+    height: 40px;
+    padding: 10px;
+    background-color: transparent;
+    border: none;
+    border-bottom: 2px solid #333;
+    text-transform: uppercase;
+}
+
+.airportData {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+}
+
+.data-row {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 5px 0;
+    border-bottom: 1px solid #ddd;
+}
+
+.windColumn {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-end;
+    gap: 2px;
+}
+
+.data-row:last-child {
+    border-bottom: none;
+}
+
+.label {
+    font-weight: bold;
+    color: #333;
+    flex-shrink: 0;
+    min-width: 120px;
+}
+
+.value {
+    text-align: right;
+    color: #333;
+    font-family: 'Courier New', monospace;
+}
+
+.zuluTime {
+    text-align: center;
+    font-size: 18px;
+    font-weight: bold;
+    margin: 10px 0;
+    color: #333;
+}
+
+.refreshButton {
+    display: flex;
+    justify-content: center;
+    padding: 20px;
+    margin: 0 30px;
+}
+
+.refreshButton button {
+    width: 100%;
+    max-width: 800px;
+    padding: 15px 30px;
+    background-color: #4A90E2;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    font-size: 16px;
+    font-weight: bold;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+}
+
+.refreshButton button:hover {
+    background-color: #357ABD;
+}
+
+.refreshButton button:active {
+    transform: translateY(1px);
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.2);
+}
