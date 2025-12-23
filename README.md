@@ -205,9 +205,10 @@ Weather data is retrieved from the [Aviation Weather Center API](https://aviatio
 Note: these are simply the parts used for the original build. A smaller computer or SD card are easily possible. Though, a different form factor computer will not fit in the 3D printed case as easily. 
 
 ### 3D Printed Parts
-Many printers will do to produce the parts used in this project. 
-For the original build, a Bambu Labs X1C was used. The 3D slicer used was Bambu Studio.
-Various filiments will also be okay for this build. The original build used PLA Matte from Bambu Labs. 
+ - Many printers will do to produce the parts used in this project. 
+ - For the original build, a Bambu Labs X1C was used. The 3D slicer used was Bambu Studio.
+ - Various filiments will also be okay for this build. The original build used PLA Matte from Bambu Labs. 
+ - Variou .f3d files are included as well. Fusion360 was used to model the parts. The archive files can be used to recover the original 3D geometry as well if someone wishes to modify them. 
 
 | Component | File | Quantity | Picture | 
 |-----------|-------------|----------|---------|
@@ -225,8 +226,7 @@ Various filiments will also be okay for this build. The original build used PLA 
 | M3 x 5mm | 4 |
 | M2.5 x 20+3mm Stand off| 4 |
 
-Picture of fasteners: 
-![Fasteners](Visual_Assets/fasteners.jpg)
+[View fasteners photo](Visual_Assets/fasteners.jpg)
 
 
 ## Author
