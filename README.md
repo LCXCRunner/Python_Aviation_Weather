@@ -2,6 +2,9 @@
 
 A Flask-based web application that fetches and displays real-time METAR (Meteorological Aerodrome Report) data for up to three airports simultaneously. The airports can be changed by typing in a different airport code for each column. 
 
+- [Full Build Photo](Visual_Assets/fullBuild.jpg)
+- [Software Screenshot](softwareScreenshot.png)
+
 ## Software
 
 ### Features
@@ -198,12 +201,12 @@ Weather data is retrieved from the [Aviation Weather Center API](https://aviatio
 | Component | Model/Specs | Quantity | Purpose | Link |
 |-----------|-------------|----------|---------|---------|
 | Single Board Computer | Raspberry Pi 4B | 1 | Main computing unit | https://www.raspberrypi.com/documentation/computers/raspberry-pi.html#flagship-models-since-raspberry-pi-4b-compute-modules-since-cm5-keyboard-models-since-pi-400 |
-| Display | 7" HDMI Touchscreen | 1 | Weather data display | https://www.raspberrypi.com/documentation/accessories/display.html |
+| Display | 7" Touchscreen | 1 | Weather data display | https://www.raspberrypi.com/documentation/accessories/display.html |
 | Power Supply | 5V 3A USB-C | 1 | Power for Raspberry Pi |
 | MicroSD Card | 32GB Class 10 | 1 | Operating system storage |
 
-[Electrical Connects 1](Visual_Assets/piToDisplayConnnections1.jpg)
-[Electrical Connects 2](Visual_Assets/piToDisplayConnnections2.jpg)
+- [Electrical Connects 1](Visual_Assets/piToDisplayConnnections1.jpg)
+- [Electrical Connects 2](Visual_Assets/piToDisplayConnnections2.jpg)
 
 Note: these are simply the parts used for the original build. A smaller computer or SD card are easily possible. Though, a different form factor computer will not fit in the 3D printed case as easily. 
 
@@ -215,11 +218,11 @@ Note: these are simply the parts used for the original build. A smaller computer
 
 | Component | File | Quantity | Picture | 
 |-----------|-------------|----------|---------|
-| Screen Holder | "Screen Holder.stl | 1 | [Screen Holder Photo](Visual_Assets/screenHolder.jpg) |
+| Screen Holder | "Screen Holder.stl" | 1 | [Screen Holder Photo](Visual_Assets/screenHolder.jpg) |
 | Screen Back | "Screen Back.stl" | 1 | [Screen Back Photo](Visual_Assets/screenBack.jpg) |
 | Pi Cover | "Pi Cover.stl" | 1 | [Pi Cover](Visual_Assets/piCover.jpg) |
-| Pi Cover Top | "Pi Cover Top.stl | 1 | [Pi Cover Top Photo](Visual_Assets/piCoverTop.jpg) |
-| Full Print Settings | "Python_Aviation_Weather_Full_Print.3mf | 1 | [Exploded View](Visual_Assets/exploded.jpg) |
+| Pi Cover Top | "Pi Cover Top.stl" | 1 | [Pi Cover Top Photo](Visual_Assets/piCoverTop.jpg) |
+| Full Print Settings | "Python_Aviation_Weather_Full_Print.3mf" | 1 | [Exploded View](Visual_Assets/exploded.jpg) |
 
 ### Fasteners
 
@@ -231,6 +234,9 @@ Note: these are simply the parts used for the original build. A smaller computer
 
 [View fasteners photo](Visual_Assets/fasteners.jpg)
 
+### Raspbian Operating System (OS)
+| Distrobution | Version | 
+| Raspbian GNU/Linux 11 | v11.11 + |
 
 ## Author
 
