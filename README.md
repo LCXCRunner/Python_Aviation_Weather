@@ -226,7 +226,7 @@ Various filiments will also be okay for this build. The original build used PLA 
 | M2.5 x 20+3mm Stand off| 4 |
 
 Picture of fasteners: 
-![Fasteners](Visual_Assets/fasteners.png)
+![Fasteners](Visual_Assets/fasteners.jpg)
 
 
 ## Author
