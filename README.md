@@ -1,27 +1,27 @@
 # Aviation Weather Display
 
-A Flask-based web application that fetches and displays real-time METAR (Meteorological Aerodrome Report) data for up to three airports simultaneously.
+A Flask-based web application that fetches and displays real-time METAR (Meteorological Aerodrome Report) data for up to three airports simultaneously. The airports can be changed by typing in a different airport code for each column. 
 
-## Features
+## Software
+
+### Features
 
 - **Real-time METAR Data**: Fetches current weather observations from the Aviation Weather API
 - **Multi-Airport Support**: Display weather for up to three airports simultaneously
 - **Automatic Calculations**:
   - Pressure altitude
   - Density altitude
-  - Temperature conversions (Celsius to Fahrenheit)
 - **Flight Categories**: Visual indicators for VFR, MVFR, IFR, and LIFR conditions
-- **Persistent Storage**: Remembers your selected airports using localStorage
-- **Responsive Design**: Clean, readable interface for desktop and mobile devices
+- **Persistent Storage**: Remembers your selected airports using localStorage after you close the browser
 - **Raspberry Pi Compatible**: Can be deployed as a fullscreen kiosk display
 
-## Technologies
+### Technologies
 
 - **Backend**: Python 3, Flask
 - **Frontend**: HTML, CSS, TypeScript
 - **API**: Aviation Weather Center (aviationweather.gov)
 
-## Project Structure
+### Project Structure
 
 ```
 Python_Aviation_Weather/
@@ -37,7 +37,7 @@ Python_Aviation_Weather/
 └── venv/                      # Python virtual environment
 ```
 
-## Installation
+### Installation
 
 1. **Clone the repository**
    ```bash
@@ -65,9 +65,9 @@ Python_Aviation_Weather/
    tsc
    ```
 
-## Usage
+### Usage
 
-### Development Mode
+#### Development Mode
 
 Run the Flask application:
 ```bash
@@ -76,25 +76,25 @@ python aviationWeatherGovAPI.py
 
 Visit `http://localhost:5000` in your web browser.
 
-### Debugging in VS Code
+#### Debugging in VS Code
 
-#### Flask Instance
+##### Flask Instance
 
 1. Ensure proper `launch.json` configuration for Flask debugging
 2. Select "Python: Flask Debug" configuration
 3. Press F5 to start debugging
 
-#### Flask and Event Listeners
+##### Flask and Event Listeners
 
 1. Ensure proper `launch.json` configuration for Flask + Typescript debugging
 2. Select "Flask + TypeScript Debug" configuration
 3. Press F5 to start debugging, make sure the flask app is running and you are accessing the `http://localhost:5000` on your browser. You can then click buttons, typing in inputs, ect to debug. 
 
-## Deployment
+### Deployment
 
-### Raspberry Pi Kiosk Setup
+#### Raspberry Pi Kiosk Setup
 
-The project includes instructions for deploying on a Raspberry Pi as a fullscreen kiosk display:
+The project includes instructions for deploying on a Raspberry Pi as a fullscreen kiosk display. It is assume that this section takes place on a raspberry pi. A 4b model was used in the initial project. 
 
 1. **Create systemd service** (`/etc/systemd/system/flaskapp.service`):
    ```ini
@@ -103,9 +103,9 @@ The project includes instructions for deploying on a Raspberry Pi as a fullscree
    After=network-online.target
 
    [Service]
-   User=jakeg
-   WorkingDirectory=/home/jakeg/Documents/Python_Aviation_Weather
-   ExecStart=/usr/bin/python /home/jakeg/Documents/Python_Aviation_Weather/aviationWeatherGovAPI.py
+   User=<user>
+   WorkingDirectory=/home/<user>/Documents/Python_Aviation_Weather
+   ExecStart=/usr/bin/python /home/<user>/Documents/Python_Aviation_Weather/aviationWeatherGovAPI.py
    Restart=always
    Environment="FLASK_ENV=production"
 
@@ -131,26 +131,32 @@ The project includes instructions for deploying on a Raspberry Pi as a fullscree
    ```
    NOTE: F11 to exit fullscreen mode
 
+   To make the file executable on Raspbian:
+   ```bash
+     --chmod +x /home/jakeg/Desktop/launch_flask_app.sh
+   ```
+   I recommend leaving this executable file on the Raspbian desktop for easy access. 
+
 4. **Changing the .service file will require you to restart the systemctl deamon if you are troubleshooting**
-    restart it if needed and then check if it is running again:
     ```bash
     sudo systemctl daemon-reload
     sudo systemctl restart flaskapp.service
     systemctl status flaskapp.service
     ```
+    Restart it if needed and then check if it is running again. This step may or may not be needed. 
 
-## API Endpoints
+### API Endpoints
 
-### `GET /`
+#### `GET /`
 Serves the main HTML interface
 
-### `GET /styles.css`
+#### `GET /styles.css`
 Serves the stylesheet
 
-### `GET /Typescript/eventListeners.js`
+#### `GET /Typescript/eventListeners.js`
 Serves the compiled JavaScript
 
-### `POST /get-metar`
+#### `POST /get-metar`
 Fetches METAR data for a specified airport
 
 **Request Body:**
@@ -181,17 +187,47 @@ Fetches METAR data for a specified airport
 }
 ```
 
-## Data Sources
+### Data Sources
 
 Weather data is retrieved from the [Aviation Weather Center API](https://aviationweather.gov/), which provides official METAR observations from airports worldwide.
 
-## License
+## Bill of Material
 
-Permission is hereby granted, free of charge, to any person obtaining a copy of this software and associated documentation files (the “Software”), to deal in the Software without restriction, including without limitation the rights to use, copy, modify, merge, publish, distribute, sublicense, and/or sell copies of the Software, and to permit persons to whom the Software is furnished to do so, subject to the following conditions:
+### Electronics
 
-The above copyright notice and this permission notice shall be included in all copies or substantial portions of the Software.
+| Component | Model/Specs | Quantity | Purpose | Link |
+|-----------|-------------|----------|---------|---------|
+| Single Board Computer | Raspberry Pi 4B | 1 | Main computing unit | https://www.raspberrypi.com/documentation/computers/raspberry-pi.html#flagship-models-since-raspberry-pi-4b-compute-modules-since-cm5-keyboard-models-since-pi-400 |
+| Display | 7" HDMI Touchscreen | 1 | Weather data display | https://www.raspberrypi.com/documentation/accessories/display.html |
+| Power Supply | 5V 3A USB-C | 1 | Power for Raspberry Pi |
+| MicroSD Card | 32GB Class 10 | 1 | Operating system storage |
 
-THE SOFTWARE IS PROVIDED “AS IS”, WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
+Note: these are simply the parts used for the original build. A smaller computer or SD card are easily possible. Though, a different form factor computer will not fit in the 3D printed case as easily. 
+
+### 3D Printed Parts
+Many printers will do to produce the parts used in this project. 
+For the original build, a Bambu Labs X1C was used. The 3D slicer used was Bambu Studio.
+Various filiments will also be okay for this build. The original build used PLA Matte from Bambu Labs. 
+
+| Component | File | Quantity | Picture | 
+|-----------|-------------|----------|---------|
+| Screen Holder | "Screen Holder.stl | 1 | "" |
+| Screen Back | "Screen Back.stl" | 1 | "" |
+| Pi Cover | "Pi Cover.stl" | 1 | "" |
+| Pi Cover Top | "Pi Cover Top.stl | 1 | "" |
+| Full Print Settings | "Python_Aviation_Weather_Full_Print.3mf | 1 | "" |
+
+### Fasteners
+
+| Component | Quantity |
+|-----------|----------|
+| M2.5 x 6mm Screw | 4 |
+| M3 x 5mm | 4 |
+| M2.5 x 20+3mm Stand off| 4 |
+
+Picture of fasteners: 
+![Fasteners](Visual_Assets/fasteners.png)
+
 
 ## Author
 
@@ -200,4 +236,4 @@ Jake G. ([@LCXCRunner](https://github.com/LCXCRunner))
 ## Acknowledgments
 
 - Aviation Weather Center for providing the METAR API
-- Built for the aviation community and computer hobbiests
+- Built for the aviation community and computer/engineering hobbiests
