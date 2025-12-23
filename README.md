@@ -205,8 +205,8 @@ Weather data is retrieved from the [Aviation Weather Center API](https://aviatio
 | Power Supply | 5V 3A USB-C | 1 | Power for Raspberry Pi |
 | MicroSD Card | 32GB Class 10 | 1 | Operating system storage |
 
-- [Electrical Connects 1](Visual_Assets/piToDisplayConnnections1.jpg)
-- [Electrical Connects 2](Visual_Assets/piToDisplayConnnections2.jpg)
+- [Electrical Connections 1](Visual_Assets/piToDisplayConnnections1.jpg)
+- [Electrical Connections 2](Visual_Assets/piToDisplayConnnections2.jpg)
 
 Note: these are simply the parts used for the original build. A smaller computer or SD card are easily possible. Though, a different form factor computer will not fit in the 3D printed case as easily. 
 
