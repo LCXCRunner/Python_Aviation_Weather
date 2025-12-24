@@ -3,7 +3,7 @@
 A Flask-based web application that fetches and displays real-time METAR (Meteorological Aerodrome Report) data for up to three airports simultaneously. The airports can be changed by typing in a different airport code for each column. 
 
 - [Full Build Photo](Visual_Assets/fullBuild.jpg)
-- [Software Screenshot](softwareScreenshot.png)
+- [Software Screenshot](Visual_Assets/softwareScreenshot.png)
 
 ## Software
 
@@ -136,75 +136,6 @@ The project includes instructions for deploying on a Raspberry Pi as a fullscree
 
    To make the file executable on Raspbian:
    ```bash
-     --chmod +x /home/jakeg/Desktop/launch_flask_app.sh
-   ```
-   I recommend leaving this executable file on the Raspbian desktop for easy access. 
-
-4. **Changing the .service file will require you to restart the systemctl deamon if you are troubleshooting**
-    ```bash
-    sudo systemctl daemon-reload
-    sudo systemctl restart flaskapp.service
-    systemctl status flaskapp.service
-    ```
-    Restart it if needed and then check if it is running again. This step may or may not be needed. 
-
-### API Endpoints
-
-#### `GET /`
-Serves the main HTML interface
-
-#### `GET /styles.css`
-Serves the stylesheet
-
-#### `GET /Typescript/eventListeners.js`
-Serves the compiled JavaScript
-
-#### `POST /get-metar`
-Fetches METAR data for a specified airport
-
-**Request Body:**
-```json
-{
-  "airport": "KSLC"
-}
-```
-
-**Response:**
-```json
-{
-  "success": true,
-  "airport": "KSLC",
-  "observationTime": "December 22, 2025 18:53 UTC",
-  "temperature": 32,
-  "dewpoint": 25,
-  "altimeter": 30.12,
-  "pressureAltitude": 4220,
-  "densityAltitude": 3890,
-  "windSpeed": 8,
-  "windDirection": 160,
-  "windGust": null,
-  "visibility": 10,
-  "clouds": [...],
-  "weather": [...],
-  "flightCategory": "VFR"
-}
-```
-
-### Data Sources
-
-Weather data is retrieved from the [Aviation Weather Center API](https://aviationweather.gov/), which provides official METAR observations from airports worldwide.
-
-## Bill of Material
-
-### Electronics
-
-| Component | Model/Specs | Quantity | Purpose | Link |
-|-----------|-------------|----------|---------|---------|
-| Single Board Computer | Raspberry Pi 4B | 1 | Main computing unit | https://www.raspberrypi.com/documentation/computers/raspberry-pi.html#flagship-models-since-raspberry-pi-4b-compute-modules-since-cm5-keyboard-models-since-pi-400 |
-| Display | 7" Touchscreen | 1 | Weather data display | https://www.raspberrypi.com/documentation/accessories/display.html |
-| Power Supply | 5V 3A USB-C | 1 | Power for Raspberry Pi |
-| MicroSD Card | 32GB Class 10 | 1 | Operating system storage |
-
 - [Electrical Connections 1](Visual_Assets/piToDisplayConnnections1.jpg)
 - [Electrical Connections 2](Visual_Assets/piToDisplayConnnections2.jpg)
 
