@@ -207,6 +207,9 @@ Weather data is retrieved from the [Aviation Weather Center API](https://aviatio
 
 - [Electrical Connections 1](Visual_Assets/piToDisplayConnections1.jpg)
 - [Electrical Connections 2](Visual_Assets/piToDisplayConnections2.jpg)
+=======
+- [Electrical Connections 1](Visual_Assets/piToDisplayConnnections1.jpg)
+- [Electrical Connections 2](Visual_Assets/piToDisplayConnnections2.jpg)
 
 Note: these are simply the parts used for the original build. A smaller computer or SD card are easily possible. Though, a different form factor computer will not fit in the 3D printed case as easily. 
 
