@@ -3,7 +3,7 @@
 A Flask-based web application that fetches and displays real-time METAR (Meteorological Aerodrome Report) data for up to three airports simultaneously. The airports can be changed by typing in a different airport code for each column. 
 
 - [Full Build Photo](Visual_Assets/fullBuild.jpg)
-- [Software Screenshot](softwareScreenshot.png)
+- [Software Screenshot](Visual_Assets/softwareScreenshot.png)
 
 ## Software
 
@@ -136,7 +136,7 @@ The project includes instructions for deploying on a Raspberry Pi as a fullscree
 
    To make the file executable on Raspbian:
    ```bash
-     --chmod +x /home/jakeg/Desktop/launch_flask_app.sh
+     --chmod +x /home/<user>/Desktop/launch_flask_app.sh
    ```
    I recommend leaving this executable file on the Raspbian desktop for easy access. 
 
@@ -205,8 +205,8 @@ Weather data is retrieved from the [Aviation Weather Center API](https://aviatio
 | Power Supply | 5V 3A USB-C | 1 | Power for Raspberry Pi |
 | MicroSD Card | 32GB Class 10 | 1 | Operating system storage |
 
-- [Electrical Connections 1](Visual_Assets/piToDisplayConnnections1.jpg)
-- [Electrical Connections 2](Visual_Assets/piToDisplayConnnections2.jpg)
+- [Electrical Connections 1](Visual_Assets/piToDisplayConnections1.jpg)
+- [Electrical Connections 2](Visual_Assets/piToDisplayConnections2.jpg)
 
 Note: these are simply the parts used for the original build. A smaller computer or SD card are easily possible. Though, a different form factor computer will not fit in the 3D printed case as easily. 
 
